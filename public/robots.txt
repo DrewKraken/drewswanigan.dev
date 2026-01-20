@@ -1,6 +1,2 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://drewswanigan.dev/sitemap.xml

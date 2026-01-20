@@ -42,20 +42,12 @@
   }
 }
 
-/* ============================================================================
-   Grid Background Pattern
-   ============================================================================ */
-
 .bg-grid-pattern {
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   background-size: 64px 64px;
 }
-
-/* ============================================================================
-   Noise Texture Overlay
-   ============================================================================ */
 
 .bg-noise::after {
   content: "";
@@ -67,17 +59,9 @@
   z-index: 1;
 }
 
-/* ============================================================================
-   Radial Gradient Utility
-   ============================================================================ */
-
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
-
-/* ============================================================================
-   Custom Glow Animation
-   ============================================================================ */
 
 @keyframes glow-pulse {
   0%, 100% { 
@@ -94,10 +78,6 @@
   animation: glow-pulse 6s ease-in-out infinite;
 }
 
-/* ============================================================================
-   Focus Styles (Accessibility)
-   ============================================================================ */
-
 :focus-visible {
   @apply outline-none ring-2 ring-cyan-500/40 ring-offset-2 ring-offset-zinc-950;
 }
@@ -106,10 +86,6 @@ a:focus-visible,
 button:focus-visible {
   @apply outline-none ring-2 ring-cyan-500/40 ring-offset-2 ring-offset-zinc-950 rounded-md;
 }
-
-/* ============================================================================
-   Custom Scrollbar
-   ============================================================================ */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -128,21 +104,15 @@ button:focus-visible {
   @apply bg-zinc-700;
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #27272a #09090b;
 }
 
-/* ============================================================================
-   Typography Enhancements
-   ============================================================================ */
-
 h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 
-/* Ensure mono fonts look crisp */
 .font-mono {
   font-feature-settings: "liga" 0;
   letter-spacing: -0.01em;
