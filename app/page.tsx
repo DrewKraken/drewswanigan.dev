@@ -11,11 +11,12 @@ import {
   Server,
   Workflow,
   FileSpreadsheet,
-  FileText,
   GitBranch,
   Zap,
   Terminal,
   ExternalLink,
+  FileText,
+  Radio,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -104,16 +105,18 @@ const productionSystems: Array<{
   link: string;
   icon: typeof Server;
   status: SystemStatus;
+  flagship?: boolean;
 }> = [
   {
-    title: "WSPanel",
-    tagline: "AWS infrastructure orchestration",
+    title: "InvoiceParser Pro",
+    tagline: "AI-powered AP automation · flagship product",
     description:
-      "One-click EC2 deployment with secure IAM role assumption, lifecycle management, and automated teardown. Integrates Stripe billing, Clerk auth, and an AI-powered setup assistant for guided provisioning.",
-    tech: ["AWS APIs", "IAM AssumeRole", "Stripe", "Clerk", "AI Assistant"],
-    link: "https://wspanel.io",
-    icon: Server,
-    status: "dev",
+      "Production B2B SaaS for accounting firms and SMBs. Multi-stage extraction pipeline (Azure Document Intelligence + GPT-4o with vision fallback), 13-layer currency resolver, math-validated outputs, and three end-to-end ERP integrations (QuickBooks, Xero, Zoho). Multi-tenant security from scratch — JWT, OAuth, TOTP, HMAC webhooks, audit-ready flows. Live with paying customers; 10K+ invoices processed in production.",
+    tech: ["Python", "FastAPI", "Next.js 16", "PostgreSQL", "OpenAI", "Azure DI", "Stripe"],
+    link: "https://invoiceparserpro.com",
+    icon: FileSpreadsheet,
+    status: "live",
+    flagship: true,
   },
   {
     title: "KrakenServers",
@@ -124,26 +127,6 @@ const productionSystems: Array<{
     link: "https://krakenservers.net",
     icon: Workflow,
     status: "beta",
-  },
-  {
-    title: "InvoiceParser Pro",
-    tagline: "PDF → structured data pipeline",
-    description:
-      "Automated extraction pipeline turning invoice PDFs into clean, structured Excel output. Python processing with validation and transformation, pay-per-use public tier, and private API access for high-volume clients.",
-    tech: ["Python", "Data Pipeline", "Stripe", "REST API"],
-    link: "https://invoiceparserpro.com",
-    icon: FileSpreadsheet,
-    status: "live",
-  },
-  {
-    title: "DocumentEase",
-    tagline: "Engineering documentation automation",
-    description:
-      "Python automation and advanced Excel formula engine to standardize commissioning and acceptance workflows. Built for repeatability, validation, and reduced manual error in engineering documentation.",
-    tech: ["Python", "Excel Automation", "Workflow Systems"],
-    link: "https://documentease.dev",
-    icon: FileText,
-    status: "live",
   },
 ];
 
@@ -166,13 +149,66 @@ const engineeringProjects = [
   },
 ];
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/drew-swanigan-4935533a2/";
+const fieldPlatforms = [
+  {
+    group: "Comms Platforms",
+    items: [
+      "L3Harris VIDA",
+      "MASTR V",
+      "StatusAware",
+      "UAS",
+      "Two47",
+      "SUMS",
+      "VIDA Edge",
+      "Motorola ASTRO P25",
+      "Tait DMR / GridLink",
+      "P25 Phase 1/2",
+      "Simulcast",
+      "BDA / DAS",
+    ],
+  },
+  {
+    group: "Dispatch Consoles",
+    items: ["Avtec", "Zetron", "Symphony", "Telex"],
+  },
+  {
+    group: "Infrastructure",
+    items: [
+      "Cisco Routing / Switching",
+      "VLANs",
+      "MPLS",
+      "IP Backhaul",
+      "Windows Server",
+      "Linux",
+      "SCADA",
+      "DNP3",
+      "RTU Integration",
+    ],
+  },
+];
+
+const fieldCustomers = [
+  "AES Ohio",
+  "EKPC",
+  "DART",
+  "Nellis AFB / Nevada DOE",
+  "Iowa Statewide (RACOM)",
+  "VELCO",
+  "Madison County KY",
+  "Clark County KY",
+  "GSCP25",
+  "Powhatan County VA",
+  "Eastern Shore VA",
+];
+
+const LINKEDIN_URL = "https://www.linkedin.com/in/drewswanigan";
 const GITHUB_URL = "https://github.com/DrewKraken";
 const EMAIL = "hello@drewswanigan.dev";
+const RESUME_URL = "/Drew_Swanigan_Resume.pdf";
 
 function Nav() {
-  // TODO: maybe add dark/light mode toggle later
   const links = [
+    { href: "#field", label: "Field" },
     { href: "#systems", label: "Systems" },
     { href: "#projects", label: "Projects" },
     { href: "#background", label: "Background" },
@@ -237,16 +273,16 @@ function Hero() {
           variants={fadeInUp}
           className="text-xl sm:text-2xl text-zinc-400 mb-4 leading-relaxed font-light"
         >
-          Backend engineer building{" "}
-          <span className="text-zinc-200">production SaaS platforms</span> and{" "}
-          <span className="text-zinc-200">infrastructure automation systems</span>.
+          Mission-critical systems engineer.{" "}
+          <span className="text-zinc-200">Public safety</span> +{" "}
+          <span className="text-zinc-200">production SaaS</span>.
         </motion.p>
 
         <motion.p
           variants={fadeInUp}
           className="text-base text-zinc-500 mb-12 font-mono"
         >
-          APIs · workers · orchestration · integrations · automation
+          PSAP · P25 · dispatch consoles · APIs · workers · integrations
         </motion.p>
 
         <motion.div
@@ -254,13 +290,9 @@ function Hero() {
           className="flex flex-wrap items-center gap-3"
         >
           <Button asChild size="lg" className="font-medium">
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+              <FileText className="mr-2 h-4 w-4" />
+              Resume
             </a>
           </Button>
           <Button
@@ -269,13 +301,15 @@ function Hero() {
             asChild
             className="font-medium"
           >
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               <Linkedin className="mr-2 h-4 w-4" />
               LinkedIn
+            </a>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              <Github className="mr-2 h-4 w-4" />
+              GitHub
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
@@ -284,6 +318,89 @@ function Hero() {
               Email
             </a>
           </Button>
+        </motion.div>
+      </div>
+    </Section>
+  );
+}
+
+function FieldWork() {
+  return (
+    <Section id="field" className="px-6 py-28">
+      <div className="max-w-5xl mx-auto">
+        <motion.div variants={fadeInUp} className="mb-14">
+          <div className="flex items-center gap-3 mb-4">
+            <Radio className="h-4 w-4 text-cyan-500/80" />
+            <span className="text-xs font-mono text-cyan-500/80 uppercase tracking-widest">
+              Day Job
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-100 mb-4 tracking-tight">
+            Public Safety Engineering
+          </h2>
+          <p className="text-sm font-mono text-zinc-500">
+            Systems Engineer · AMK Services · 2020 – Present
+          </p>
+        </motion.div>
+
+        <motion.div variants={fadeInUp} className="mb-10">
+          <div className="relative pl-6 border-l-2 border-zinc-800">
+            <p className="text-lg text-zinc-300 leading-relaxed mb-6">
+              Mission-critical communications deployments for PSAPs, electric
+              utilities, and federal customers. Full-lifecycle work: system
+              design, FAT / ATP, multi-site commissioning, RF alignment,
+              dispatch console integration, and zero-interruption cutover.
+            </p>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              Before the engineering side, I spent two years as a
+              DOCJT-certified 911 telecommunicator at Georgetown-Scott County
+              E911 — operating the same consoles I now install. Every cutover
+              plan I write starts with &ldquo;what does the dispatcher feel at
+              3 a.m.&rdquo;
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div variants={fadeInUp} className="mb-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-6 bg-zinc-700" />
+            <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">
+              Customer Deployments
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {fieldCustomers.map((customer) => (
+              <span
+                key={customer}
+                className="px-2.5 py-1 text-[11px] font-mono rounded bg-zinc-900/60 border border-zinc-800/80 text-zinc-400"
+              >
+                {customer}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div variants={fadeInUp} className="space-y-6">
+          {fieldPlatforms.map((group) => (
+            <div key={group.group}>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-px w-6 bg-zinc-700" />
+                <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">
+                  {group.group}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="px-2 py-0.5 text-[11px] font-mono rounded bg-zinc-800/60 border border-zinc-700/40 text-zinc-400"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </Section>
@@ -311,9 +428,19 @@ function SystemCard({
       >
         <motion.div
           variants={cardHover}
-          className="relative h-full rounded-xl border border-zinc-800/80 bg-zinc-900/40 backdrop-blur-sm p-6 transition-colors duration-300 hover:border-zinc-700/80 hover:bg-zinc-900/60 overflow-hidden"
+          className={`relative h-full rounded-xl border bg-zinc-900/40 backdrop-blur-sm p-6 transition-colors duration-300 overflow-hidden ${
+            system.flagship
+              ? "border-cyan-500/30 hover:border-cyan-500/50 hover:bg-zinc-900/60"
+              : "border-zinc-800/80 hover:border-zinc-700/80 hover:bg-zinc-900/60"
+          }`}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.03] via-transparent to-violet-500/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${
+              system.flagship
+                ? "from-cyan-500/[0.08] via-transparent to-violet-500/[0.04]"
+                : "from-cyan-500/[0.03] via-transparent to-violet-500/[0.02]"
+            } opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+          />
 
           <div className="relative flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -321,12 +448,19 @@ function SystemCard({
                 <Icon className="h-5 w-5 text-zinc-400 group-hover:text-cyan-400 transition-colors duration-300" />
               </div>
               <div className="flex items-center gap-2">
-                <span className={`w-1.5 h-1.5 rounded-full ${status.dotColor}`} />
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${status.dotColor}`}
+                />
                 <span
                   className={`text-[11px] font-mono uppercase tracking-wide ${status.textColor}`}
                 >
                   {status.label}
                 </span>
+                {system.flagship && (
+                  <span className="text-[11px] font-mono uppercase tracking-wide text-cyan-400/80">
+                    · Flagship
+                  </span>
+                )}
               </div>
             </div>
             <ArrowUpRight className="h-4 w-4 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
@@ -361,7 +495,10 @@ function SystemCard({
 
 function ProductionSystems() {
   return (
-    <Section id="systems" className="px-6 py-28">
+    <Section
+      id="systems"
+      className="px-6 py-28 bg-gradient-to-b from-zinc-950 via-zinc-900/30 to-zinc-950"
+    >
       <div className="max-w-5xl mx-auto">
         <motion.div variants={fadeInUp} className="mb-14">
           <div className="flex items-center gap-3 mb-4">
@@ -374,8 +511,9 @@ function ProductionSystems() {
             Systems in Production
           </h2>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            Real platforms with real users. Third-party API integrations, 
-            persistent data layers, operational workflows—not starter templates.
+            What I ship independently. Real platforms with paying users —
+            third-party API integrations, persistent data layers, and
+            operational workflows that have to work the first time, every time.
           </p>
         </motion.div>
 
@@ -429,10 +567,7 @@ function ProjectRow({
 
 function EngineeringProjects() {
   return (
-    <Section
-      id="projects"
-      className="px-6 py-28 bg-gradient-to-b from-zinc-950 via-zinc-900/30 to-zinc-950"
-    >
+    <Section id="projects" className="px-6 py-28">
       <div className="max-w-5xl mx-auto">
         <motion.div variants={fadeInUp} className="mb-12">
           <div className="flex items-center gap-3 mb-4">
@@ -445,7 +580,8 @@ function EngineeringProjects() {
             Engineering Projects
           </h2>
           <p className="text-zinc-500 max-w-lg text-sm">
-            Focused backend work demonstrating clean patterns. Architecture over cleverness.
+            Focused backend work demonstrating clean patterns. Architecture
+            over cleverness.
           </p>
         </motion.div>
 
@@ -461,7 +597,10 @@ function EngineeringProjects() {
 
 function Background() {
   return (
-    <Section id="background" className="px-6 py-28">
+    <Section
+      id="background"
+      className="px-6 py-28 bg-gradient-to-b from-zinc-950 via-zinc-900/30 to-zinc-950"
+    >
       <div className="max-w-3xl mx-auto">
         <motion.div variants={fadeInUp} className="mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -471,21 +610,30 @@ function Background() {
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-zinc-200 tracking-tight">
-            Production Systems Background
+            From the dispatcher&rsquo;s chair to the engineering side
           </h2>
         </motion.div>
 
         <motion.div variants={fadeInUp}>
-          <div className="relative pl-6 border-l-2 border-zinc-800">
-            <p className="text-lg text-zinc-300 leading-relaxed mb-6">
-              I work in mission-critical infrastructure—deploying, commissioning, and 
-              troubleshooting production systems across networking, virtualization, and 
-              site environments. Building software systems in parallel.
+          <div className="relative pl-6 border-l-2 border-zinc-800 space-y-6">
+            <p className="text-lg text-zinc-300 leading-relaxed">
+              Started in a 911 center. Two years of phone, radio, CAD, and
+              dispatch console — every public safety agency in Scott County
+              flowing through one chair. That&rsquo;s where I learned what
+              actually goes wrong with mission-critical systems at 3 a.m.,
+              and what dispatchers need from the people who build them.
             </p>
             <p className="text-base text-zinc-400 leading-relaxed">
-              That background shapes how I write code. I care about clear failure modes, 
-              observability, and avoiding &quot;magic.&quot; Try to write things other engineers 
-              can actually pick up and debug at 2 AM.
+              Moved to the engineering side in 2020. Same systems, different
+              chair. Now I deploy and commission the consoles, P25
+              infrastructure, and dispatch networks I used to operate. Software
+              builds run in parallel — same discipline applied to code.
+            </p>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              That background shapes how I write code. I care about clear
+              failure modes, observability, and avoiding &ldquo;magic.&rdquo;
+              Try to write things other engineers can actually pick up and
+              debug at 2 AM.
             </p>
           </div>
         </motion.div>
@@ -496,18 +644,17 @@ function Background() {
 
 function Contact() {
   return (
-    <Section
-      id="contact"
-      className="px-6 py-28 bg-gradient-to-b from-zinc-950 to-zinc-900/40"
-    >
+    <Section id="contact" className="px-6 py-28">
       <div className="max-w-2xl mx-auto text-center">
         <motion.div variants={fadeInUp}>
           <h2 className="text-3xl sm:text-4xl font-bold text-zinc-100 mb-4 tracking-tight">
             Let&apos;s connect
           </h2>
-          <p className="text-zinc-500 mb-10 max-w-md mx-auto">
-            Open to backend engineering, platform development, and infrastructure
-            automation roles.
+          <p className="text-zinc-500 mb-10 max-w-xl mx-auto leading-relaxed">
+            Open to Implementation Engineer, Solutions Engineer, and Technical
+            Account Manager roles in public safety SaaS — and always happy to
+            talk PSAP integration, P25 cutover war stories, or SaaS builder
+            stuff.
           </p>
         </motion.div>
 
@@ -516,9 +663,9 @@ function Contact() {
           className="flex flex-wrap items-center justify-center gap-3"
         >
           <Button asChild size="lg" className="font-medium">
-            <a href={`mailto:${EMAIL}`}>
-              <Mail className="mr-2 h-4 w-4" />
-              {EMAIL}
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+              <FileText className="mr-2 h-4 w-4" />
+              Resume
             </a>
           </Button>
           <Button
@@ -527,23 +674,21 @@ function Contact() {
             asChild
             className="font-medium"
           >
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="mr-2 h-4 w-4" />
-              GitHub
+            <a href={`mailto:${EMAIL}`}>
+              <Mail className="mr-2 h-4 w-4" />
+              {EMAIL}
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               <Linkedin className="mr-2 h-4 w-4" />
               LinkedIn
+            </a>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              <Github className="mr-2 h-4 w-4" />
+              GitHub
             </a>
           </Button>
         </motion.div>
@@ -561,11 +706,12 @@ export default function Home() {
       <div className="relative z-10">
         <Nav />
         <Hero />
+        <FieldWork />
         <ProductionSystems />
         <EngineeringProjects />
         <Background />
         <Contact />
-        
+
         <footer className="border-t border-zinc-800/40 px-6 py-6">
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
             <p className="font-mono">© {new Date().getFullYear()} Drew Swanigan</p>

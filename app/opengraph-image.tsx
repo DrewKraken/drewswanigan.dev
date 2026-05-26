@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Drew Swanigan — Backend Engineer';
+export const alt = 'Drew Swanigan — Public Safety Systems Engineer + SaaS Founder';
 export const size = {
   width: 1200,
   height: 630,
@@ -40,10 +40,11 @@ export default async function Image() {
             fontSize: 36,
             color: '#a1a1aa',
             fontWeight: 300,
-            maxWidth: 900,
+            maxWidth: 1000,
+            lineHeight: 1.2,
           }}
         >
-          Backend engineer building production SaaS platforms and infrastructure automation systems
+          Mission-critical systems engineer. Public safety + production SaaS.
         </div>
         <div
           style={{
@@ -53,7 +54,7 @@ export default async function Image() {
             fontFamily: 'monospace',
           }}
         >
-          APIs · workers · orchestration · integrations · automation
+          PSAP · P25 · dispatch consoles · Python · FastAPI · Next.js
         </div>
       </div>
     ),

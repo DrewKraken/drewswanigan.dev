@@ -3,24 +3,43 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
+const TITLE = "Drew Swanigan — Public Safety Systems Engineer + SaaS Founder";
+const DESCRIPTION =
+  "Mission-critical systems engineer. Public safety communications (P25, PSAP, dispatch consoles) and production SaaS. Former 911 telecommunicator.";
+
 export const metadata: Metadata = {
-  title: "Drew Swanigan — Backend Engineer",
-  description:
-    "Backend engineer building SaaS platforms and infrastructure automation systems. APIs, workers, orchestration, and product engineering.",
+  title: TITLE,
+  description: DESCRIPTION,
   keywords: [
-    "backend engineer",
+    "public safety",
+    "PSAP",
+    "P25",
+    "Project 25",
+    "L3Harris VIDA",
+    "MASTR V",
+    "Motorola ASTRO P25",
+    "Tait DMR",
+    "Avtec",
+    "Zetron",
+    "dispatch console",
+    "mission critical communications",
+    "systems engineer",
+    "implementation engineer",
+    "solutions engineer",
+    "technical account manager",
+    "911 telecommunicator",
+    "CJIS",
+    "SCADA",
     "SaaS",
-    "infrastructure automation",
-    "AWS",
-    "Node.js",
     "Python",
+    "FastAPI",
     "TypeScript",
+    "Next.js",
   ],
   authors: [{ name: "Drew Swanigan" }],
   openGraph: {
-    title: "Drew Swanigan — Backend Engineer",
-    description:
-      "Backend engineer building SaaS platforms and infrastructure automation systems.",
+    title: TITLE,
+    description: DESCRIPTION,
     url: "https://drewswanigan.dev",
     siteName: "Drew Swanigan",
     locale: "en_US",
@@ -28,9 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Drew Swanigan — Backend Engineer",
-    description:
-      "Backend engineer building SaaS platforms and infrastructure automation systems.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
