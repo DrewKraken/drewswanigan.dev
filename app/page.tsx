@@ -122,9 +122,9 @@ const productionSystems: Array<{
   },
   {
     title: "ClearComm911",
-    tagline: "Real-time translation for 911 dispatch",
+    tagline: "Real-time translation for 911 dispatch · open-source R&D",
     description:
-      "Real-time, two-way language translation for 911 and dispatch calls — a non-English caller is understood immediately, the dispatcher reads a live English transcript, and the reply is translated back, with no hold and no interpreter line. Design and architecture stage: published system architecture and CJIS Security Policy considerations, engineered so caller audio can stay inside the PSAP network boundary, with no audio retention and no training on customer data. First implementation targets a controlled pilot on administrative lines at a real PSAP.",
+      "An open-source research project — not a product or service I sell. Real-time, two-way language translation for 911 and dispatch calls: a non-English caller is understood immediately, the dispatcher reads a live English transcript, and the reply is translated back, with no hold and no interpreter line. Design and architecture stage: published system architecture and CJIS Security Policy considerations, engineered so caller audio can stay inside the PSAP network boundary, with no audio retention and no training on data. Built to explore the hard parts — latency, reliability, and security — with any real-world testing limited to a controlled, non-production pilot on administrative lines.",
     tech: ["Real-time STT/TTS", "Streaming", "CJIS Security Policy", "PSAP integration"],
     link: "https://github.com/DrewKraken/clearcomm911",
     icon: Languages,
