@@ -17,6 +17,8 @@ import {
   ExternalLink,
   FileText,
   Radio,
+  Languages,
+  Target,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -119,6 +121,16 @@ const productionSystems: Array<{
     flagship: true,
   },
   {
+    title: "ClearComm911",
+    tagline: "Real-time translation for 911 dispatch",
+    description:
+      "Real-time, two-way language translation for 911 and dispatch calls — a non-English caller is understood immediately, the dispatcher reads a live English transcript, and the reply is translated back, with no hold and no interpreter line. Design and architecture stage: published system architecture and CJIS Security Policy considerations, engineered so caller audio can stay inside the PSAP network boundary, with no audio retention and no training on customer data. First implementation targets a controlled pilot on administrative lines at a real PSAP.",
+    tech: ["Real-time STT/TTS", "Streaming", "CJIS Security Policy", "PSAP integration"],
+    link: "https://github.com/DrewKraken/clearcomm911",
+    icon: Languages,
+    status: "dev",
+  },
+  {
     title: "KrakenServers",
     tagline: "Hosting platform control plane",
     description:
@@ -131,6 +143,14 @@ const productionSystems: Array<{
 ];
 
 const engineeringProjects = [
+  {
+    title: "marketing-for-builders",
+    description:
+      "Claude Code skills package encoding go-to-market craft — positioning, landing copy, launch — for technical founders who can ship but can't sell. Every skill is held to a measured bar: a deterministic linter as a guardrail plus a blind LLM-judge panel as the benchmark. Across 5 product shapes, all three skills won 15/15 blind-judge votes over unaided output — limits reported honestly.",
+    focus: "AI skills · eval harness · LLM-judge benchmarking",
+    link: "https://github.com/DrewKraken/marketing-for-builders",
+    icon: Target,
+  },
   {
     title: "github-issues-sync",
     description:
@@ -416,7 +436,10 @@ function SystemCard({
   const status = statusConfig[system.status];
 
   return (
-    <motion.div variants={fadeInUp}>
+    <motion.div
+      variants={fadeInUp}
+      className={system.flagship ? "md:col-span-2" : ""}
+    >
       <motion.a
         href={system.link}
         target="_blank"
@@ -511,9 +534,10 @@ function ProductionSystems() {
             Systems in Production
           </h2>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            What I ship independently. Real platforms with paying users —
-            third-party API integrations, persistent data layers, and
-            operational workflows that have to work the first time, every time.
+            What I build and ship independently. Real platforms with third-party
+            API integrations, persistent data layers, and operational workflows
+            that have to work the first time, every time — from a live flagship
+            to what I&rsquo;m architecting next.
           </p>
         </motion.div>
 
@@ -580,8 +604,8 @@ function EngineeringProjects() {
             Engineering Projects
           </h2>
           <p className="text-zinc-500 max-w-lg text-sm">
-            Focused backend work demonstrating clean patterns. Architecture
-            over cleverness.
+            Focused open-source work demonstrating clean patterns and measured
+            quality. Architecture over cleverness.
           </p>
         </motion.div>
 
